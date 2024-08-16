@@ -1,10 +1,13 @@
+let humanScore = 0;
+let computerScore = 0;
+
+
 // 1. Declare a getComputerChoice function
 function getComputerChoice() {
 
 
     // 2. Declare a result variable to a math-function returning value between 1-10;
     let result = Math.floor((Math.random() * 10) + 1);
-    console.log(result);
     // 3. If result is smaller than 4 then return "Rock";
     if (result < 4) {
         return "Rock";
@@ -45,11 +48,40 @@ function getHumanChoice() {
             return "Scissors";
             //7.Else return "Please choose from the given options:1,2,3)"
         } else {
-            console.log(keepGoing);
             console.log("Please choose from the given options:1,2,3");
         }
     }
 }
+// for playRound
+//we will declare a playRound function which have 2 inputs human and computer
+
+function playRound(humanChoice, computerChoice) {
+    // then we will use conditions
+    // if human and computer both choose rock/paper/scissors then we will display that its a tie and we will not anyone's score
+    if (humanChoice === computerChoice) {
+        console.log(`You V/S Computer\n${humanChoice} VS ${computerChoice}It's a tie.\n Current Score is\n Computer Score: ${computerScore} Your Score: ${humanScore}`);
+        //if human choice is rock and computer choice is scissor or human's choice is paper and computer choice is rock or human choice is scissors and computer choice is paper we will display that human won and increment the human score
+
+    } else if (
+        (humanChoice === "Rock" && computerChoice === "Scissors") ||
+        (humanChoice === "Paper" && computerChoice === "Rock") ||
+        (humanChoice === "Scissors" && computerChoice === "Paper")) {
+        ++humanScore;
+        console.log(`You V/S Computer\n${humanChoice} VS ${computerChoice}\nYou win.\nCurrent Score is:\nComputer Score: ${computerScore} Your Score: ${humanScore}`);
+
+        //if computer choice is rock and human choice is scissor or computer's choice is paper and human choice is rock or computer choice is scissors and human choice is paper we will display that computer won and increment the computer's score
+    } else {
+        ++computerScore;
+        console.log(`You V/S Computer\n${humanChoice} VS ${computerChoice}\nComputer Wins.\nCurrent Score is:\nComputer Score: ${computerScore} Your Score: ${humanScore}`);
+
+    }
+
+}
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+
 
 // function showGame() {
 //     console.log(getHumanChoice());

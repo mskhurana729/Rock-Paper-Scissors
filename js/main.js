@@ -18,30 +18,43 @@ function getComputerChoice() {
         return "Scissors";
     }
 }
+function aTie(humanChoice, computerChoice) {
+    return (humanChoice === computerChoice);
+}
+function humanWins(humanChoice, computerChoice) {
+    return ((humanChoice === "Rock" && computerChoice === "Scissors") ||
+        (humanChoice === "Paper" && computerChoice === "Rock") ||
+        (humanChoice === "Scissors" && computerChoice === "Paper"));
+}
+function showRoundWinner(humanChoice, computerChoice, winner) {
+    para.appendChild(document.createTextNode(
+        `You V/S Computer ${humanChoice} VS ${computerChoice}
+        It's a ${winner}.
+        Current Score is Computer Score: ${computerScore} Your Score: ${humanScore}`));
+}
 
 
 function playRound(e) {
     let computerChoice = getComputerChoice();
     let humanChoice = e.target.value;
+    let winner = "";
 
     para.textContent = ""; // to clear the screen
 
-    if (humanChoice === computerChoice) {
+    if (aTie(humanChoice, computerChoice)) {
 
-        para.appendChild(document.createTextNode(`You V/S Computer ${humanChoice} VS ${computerChoice}It's a tie. Current Score is Computer Score: ${computerScore} Your Score: ${humanScore}`));
+        showRoundWinner(humanChoice, computerChoice, winner = "Tie");
 
 
-    } else if (
-        (humanChoice === "Rock" && computerChoice === "Scissors") ||
-        (humanChoice === "Paper" && computerChoice === "Rock") ||
-        (humanChoice === "Scissors" && computerChoice === "Paper")) {
+
+    } else if (humanWins(humanChoice, computerChoice)) {
         ++humanScore;
-        para.appendChild(document.createTextNode(`You V/S Computer ${humanChoice} VS ${computerChoice} You win. Current Score is:\nComputer Score: ${computerScore} Your Score: ${humanScore}`));
+        showRoundWinner(humanChoice, computerChoice, winner = "You");
 
 
     } else {
         ++computerScore;
-        para.appendChild(document.createTextNode(`You V/S Computer ${humanChoice} VS ${computerChoice} Computer Wins.\nCurrent Score is: Computer Score: ${computerScore} Your Score: ${humanScore}`));
+        showRoundWinner(humanChoice, computerChoice, winner = "Computer");
 
     }
     div.appendChild(para);

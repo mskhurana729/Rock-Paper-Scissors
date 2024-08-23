@@ -3,12 +3,8 @@ let humanScore = 0;
 let computerScore = 0;
 const div = document.querySelector('div');
 const para = document.createElement('p');
-
-
 buttons.forEach(button => button.addEventListener("click", playRound));
-
 function getComputerChoice() {
-
     let result = Math.floor((Math.random() * 10) + 1);
     if (result < 4) {
         return "Rock";
@@ -32,13 +28,10 @@ function showRoundWinner(humanChoice, computerChoice, winner) {
         It's a ${winner}.
         Current Score is Computer Score: ${computerScore} Your Score: ${humanScore}`));
 }
-
-
 function playRound(e) {
     let computerChoice = getComputerChoice();
     let humanChoice = e.target.value;
     let winner = "";
-
     para.textContent = ""; // to clear the screen
 
     if (aTie(humanChoice, computerChoice)) {
